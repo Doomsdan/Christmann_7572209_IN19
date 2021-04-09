@@ -41,6 +41,8 @@ classdef GradientDescentOptimizer < matlab.mixin.SetGet
             obj.costHistory = costOverIters;
             linearRegressionModel.setThetaOptimum(theta(1),theta(2));
             h = obj.showTrainingResult();
+            
+            %The actual training of the model
         end
         
         function h = showTrainingResult(obj)

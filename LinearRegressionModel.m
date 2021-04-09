@@ -32,10 +32,7 @@ classdef LinearRegressionModel < matlab.mixin.SetGet
             J = 1/(2*m)* sum((h - obj.trainingData.commandVar).^2);
             
           
-            % compute the costs
-            % therefore use the hypothesis function as well
-            % this calculation can be done by one line of code
-            % returns the cost value J
+            % calculates the cost with the current set of thetas
             
         end
         
@@ -45,26 +42,19 @@ classdef LinearRegressionModel < matlab.mixin.SetGet
             hValue = X * obj.theta;
             
           
-            % compute the hypothesis values for each sample
-            % therefore compute the matrix multiplication with X
-            % this calculation can be done by one line of code
+           % calculates the h-Value with a matrix multiplication
             
         end
+        
         
         function h = showOptimumInContour(obj)
             h = figure('Name','Optimum');
             theta0_vals = linspace(50, 150, 100);
             theta1_vals = linspace(0, 2, 100);
-            Z = zeros(100);
             
-            for v = 1:100
-                t1 = theta0_vals(v);
-                for w = 1:100
-                    t2 = theta1_vals(w);
-                    obj.setTheta(t1,t2);
-                    Z(v,w) = obj.costFunction();
-                end
-            end
+            fun = @(a,b) calculateCost(a,b);
+            
+            Z = bsxfun(fun,theta0_vals,theta1_vals);
             
             Z = transpose(Z);
             
@@ -72,14 +62,15 @@ classdef LinearRegressionModel < matlab.mixin.SetGet
             contour(theta0_vals,theta1_vals,Z);
             plot(obj.thetaOptimum(1),obj.thetaOptimum(2),'x', 'MarkerSize', 10, 'MarkerEdgeColor','red', 'LineWidth',2);
             hold off;        
-                
             
-            % ========= YOUR CODE HERE =========
-            % compute the costs for each theta_vals tuple
-            % plot the costs with the contour command
-            % add x and y label
-            % add the optimum theta value to the plot (red X, MarkerSize: 10, LineWidth: 2)
-            
+            %plots the contour graph
+        end 
+        
+        
+        function Z = calculateCosts(obj,A,B)
+        obj.setTheta(A,B);
+        Z = obj.costFunction();
+        %calculates the cost for a specific theta tupel
         end
         
         function h = showCostFunctionArea(obj)
@@ -87,23 +78,16 @@ classdef LinearRegressionModel < matlab.mixin.SetGet
             theta0_vals = linspace(50, 150, 100);
             theta1_vals = linspace(0, 2, 100);
            
-             Z = zeros(100);
             
-            for v = 1:100
-                t1 = theta0_vals(v);
-                for w = 1:100
-                    t2 = theta1_vals(w);
-                    obj.setTheta(t1,t2);
-                    Z(v,w) = obj.costFunction();
-                end
-            end
+            fun = @(a,b) calculateCost(a,b);
+            
+            Z = bsxfun(fun,theta0_vals,theta1_vals);
+            
+            Z = transpose(Z);
             
             surf(Z);
-            % ========= YOUR CODE HERE =========
-            % compute the costs for each theta_vals tuple
-            % plot the costs with the surf command
-            % add x and y label
-            
+           
+            %plots the surface graph
         end
         
         function h = showTrainingData(obj)
