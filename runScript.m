@@ -32,8 +32,9 @@ disp("current costs for theta = " + "[" + num2str(LRMObject.theta(1)) + ";" + nu
     ": " + num2str(cost) + ", expected: 79994.0539");
 
 %% show cost function area
+tic
 costFunctionFigure = LRMObject.showCostFunctionArea();
-
+toc
 %% perform the training
 tic
 LRMObject.optimizer.runTraining(LRMObject);
@@ -43,5 +44,6 @@ toc
 lrmFigure = LRMObject.showModel();
 
 %% sho optimum in contour plot
+tic
 optimumFigure = LRMObject.showOptimumInContour();
-
+toc
