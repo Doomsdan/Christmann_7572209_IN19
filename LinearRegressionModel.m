@@ -67,7 +67,7 @@ classdef LinearRegressionModel < matlab.mixin.SetGet
         end 
         
         
-        function Z = calculateCosts(obj,A,B)
+        function Z = calculateCosts(obj,A,B) % meaningless varnames
         obj.setTheta(A,B);
         Z = obj.costFunction();
         %calculates the cost for a specific theta tupel
