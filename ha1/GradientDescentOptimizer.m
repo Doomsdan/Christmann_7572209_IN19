@@ -26,14 +26,9 @@ classdef GradientDescentOptimizer < matlab.mixin.SetGet
             [alpha,maxIters,theta,X,y,m,costOverIters] = obj.getLocalsForTraining(linearRegressionModel);
                       
            for  v = 1:maxIters
-               h =  X * theta ;
-               t1 = theta(1) - alpha *( 1/m ) * sum( h-y );
-               t2 = theta(2) - alpha *( 1/m ) * sum(( h-y ).* X(:,2));
-               theta(1) = t1;
-               theta(2) = t2;
-               test = linearRegressionModel.costFunction();
-               linearRegressionModel.setTheta(t1,t2);
-               costOverIters(v) = test; 
+               theta = theta - (alpha/m)*(X'*(linearRegressionModel.hypothesis()-y));
+               linearRegressionModel.setTheta(theta(1),theta(2));
+               costOverIters(v) = linearRegressionModel.costFunction();
            end 
                
                
