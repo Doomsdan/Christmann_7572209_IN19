@@ -15,7 +15,7 @@ dataForLinearRegression = LinearRegressionDataFormatter('Data','TempearatureMeas
     'Feature','T3','CommandVar','T4');
 
 %% create optimizer object
-gradientDescentOptimizer = GradientDescentOptimizer('LearningRate',9e-6,'MaxIterations',1e7);
+gradientDescentOptimizer = GradientDescentOptimizer('LearningRate',9e-6,'MaxIterations',1e6);
 
 %% create lineaer regression model object
 LRMObject = LinearRegressionModel('Data',dataForLinearRegression,'Optimizer',gradientDescentOptimizer);
@@ -33,7 +33,7 @@ disp("current costs for theta = " + "[" + num2str(LRMObject.theta(1)) + ";" + nu
 
 %% show cost function area
 tic
-costFunctionFigure = LRMObject.showCostFunctionArea();
+%costFunctionFigure = LRMObject.showCostFunctionArea();
 toc
 %% perform the training
 tic
