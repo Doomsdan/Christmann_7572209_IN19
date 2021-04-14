@@ -24,10 +24,15 @@ end
 %% check for neccecssary parameters
 if ~exist('func','var')
     error('No valid function');
-elseif ~exist('dfunc','var')
-    error('No valid derivative');
 end
 
+    
+if ~exist('dfunc','var')
+     answer = questdlg('Wie wollen sie differenzieren',...
+         'Differenz Typen',...
+         'Vorwärtsdifferenzieren','Rückwärtsdifferenzieren',...
+         'Zentraldifferenzieren','Zentraldifferenzieren');
+end
 
 if ~exist('x0','var')
     x0 = 0;
@@ -86,7 +91,12 @@ for i=1:maxIter
         abortflag = 'feps';
         break;
     end
-    df = dfunc(xOld);
+    if ~exist('dfunc','var')
+    df = numDiff(func,xOld,answer);
+    else
+        df = dfunc(xOld);
+    end
+   
     if df == 0
         abortflag = 'df is 0';
         break;

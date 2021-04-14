@@ -7,4 +7,4 @@ maxIter = 30;
 feps = 1e-8;
 xeps = 1e-8; 
 
-[xZero,abortflag, iters] = myNewton('Function',@myPoly,'Derivative',@dmyPoly,'LivePlot','on');
+[xZero,abortflag, iters] = myNewton('Function',@myPoly,'Feps',feps,'Xeps',xeps,'LivePlot','on');
