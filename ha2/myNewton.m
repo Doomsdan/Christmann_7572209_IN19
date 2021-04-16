@@ -116,4 +116,5 @@ for i=1:maxIter
 end
 xZero = xNew;
 iters = i;
+disp(['Abort reason: ',abortflag]);
 end
