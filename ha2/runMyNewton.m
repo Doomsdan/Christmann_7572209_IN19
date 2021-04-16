@@ -1,3 +1,13 @@
+%% runScript: 
+% runs the Newton-algorithm and visulaize the reults
+%
+% See also: numDiff, myNewton,
+% Author: Daniel Stefan Christmann
+% DHBW Stuttgart
+% email: daniel-christmann@outlook.de
+% data: Q1 2021
+
+%% mandatory
 clear; clc; close all;
 
 %% 
