@@ -1,4 +1,4 @@
-function [xZero,abortflag, iters] = myNewton(varargin)
+function [xZero,abortflag, iters, h] = myNewton(varargin)
 %%do the vcarargin
 for i = 1:nargin
     if strcmp(varargin{i},'Function')
@@ -79,7 +79,6 @@ if strcmp(livePlot,'on')
     grid on;
     xlim('auto');
     ylim('auto');
-
 end
 
 
@@ -92,7 +91,7 @@ for i=1:maxIter
         break;
     end
     if ~exist('dfunc','var')
-    df = numDiff(func,xOld,answer);
+        df = numDiff(func,xOld,answer);
     else
         df = dfunc(xOld);
     end
